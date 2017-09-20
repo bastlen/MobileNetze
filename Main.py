@@ -32,7 +32,7 @@ _s1 = execCommand(command1)
 _s2 = execCommand(command1)
 
 #print(s1[s1.index(s2) + len(s2):])
-
+#TODO parse infomration out of callbacks
 print('command1')
 print(_s1)
 print('command2')
