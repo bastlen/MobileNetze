@@ -1,22 +1,22 @@
 import telnetlib
-import sqlite3
 
+## establish connection BCS(PC) BTS(nanoBTS)
 tn = telnetlib.Telnet('localhost', port=4242, timeout=20)
 print('Connection established!')
 
-################
-# main program #
-################
+##vars
+# admin subscriber id
+adminSubID = 9
 
-# arguments
+## arguments
+# inital command
 defCommand = b""
+# show subscriber
 command1 = b"show subscriber id 1"
-
 #TODO Build SMS command subscriber id 1 sms sender id 2 send Hello World
 commandSMS = "subscriber id \i sms sender  "
 
-
-# execute comands
+## execute comands
 def execCommand(command):
     # write command to nanoBTS
     tn.write(command + b"\n")
@@ -27,18 +27,30 @@ def execCommand(command):
     print('Command executed!')
     return ret2
 
-# default test (get connection)
+
+## send SMS as Admin to receiver
+def adminSMS(receiverID, message):
+    arg = "subscriber id " + str(receiverID) + " sms sender id " + str(adminSubID) + " send ADMIN: " + message + "."
+    print(str.encode(arg,'ascii'))
+    execCommand(str.encode(arg,'ascii'))
+
+
+## send broadcast SMS as Admin to multible receivers
+def broadcastSMS(receiverIDs, message):
+    for x in receiverIDs:
+        adminSMS(x, message)
+
+
+## TESTS
+
+## default test (get connection)
 execCommand(defCommand)
 
-# execute commands
-_s1 = execCommand(command1)
-#s1 = str(_s1)
-#s2 = "IMSI: "
-_s2 = execCommand(command1)
+## admin singel SMS
+adminSMS(2, "Testmessage")
 
-#print(s1[s1.index(s2) + len(s2):])
-#TODO parse infomration out of callbacks
-print('command1')
-print(_s1)
-print('command2')
-print(_s2)
+## broaadcast SMS
+# list with subscriber ID
+idList = [2, 5, 8]
+broadcastSMS(idList,"Turn Off Phone!")
+
