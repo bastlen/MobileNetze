@@ -1,0 +1,70 @@
+1. Reset
+
+2. set IP adress
+sudo ifconfig enp0s25 192.168.9.5
+ip: 192.168.9.5
+
+
+3. dhcp start
+
+sudo /etc/init.d/isc-dhcp-server start
+
+
+sudo tcpdump -i enp0s25
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on enp0s25, link-type EN10MB (Ethernet), capture size 262144 bytes
+11:03:49.856697 IP 0.0.0.0.bootpc > 255.255.255.255.bootps: BOOTP/DHCP, Request from 00:02:95:00:6d:0d (oui Unknown), length 305
+11:03:49.856917 IP 192.168.9.5.bootps > 255.255.255.255.bootpc: BOOTP/DHCP, Reply, length 300
+
+
+
+4.abisip-find
+sudo ./abisip-find enp0s25
+
+sudo ./abisip-find enp0s25abisip-find (C) 2009 by Harald Welte
+This is FREE SOFTWARE with ABSOLUTELY NO WARRANTY
+
+Trying to find ip.access BTS by broadcast UDP...
+MAC_Address='00:02:95:00:6d:0d'  IP_Address='192.168.9.53'  Unit_ID='65535/0/0'  Location_1=''  Location_2='BTS_NBT131G'  Equipment_Version='165g029_79'  Software_Version='168a352_v142b30d0'  Unit_Name='nbts-00-02-95-00-6D-0D'  Serial_Number='00200285'  
+MAC_Address='00:02:95:00:6d:0d'  IP_Address='192.168.9.53'  Unit_ID='65535/0/0'  Location_1=''  Location_2='BTS_NBT131G'  Equipment_Version='165g029_79'  Software_Version='168a352_v142b30d0'  Unit_Name='nbts-00-02-95-00-6D-0D'  Serial_Number='00200285'  
+MAC_Address='00:02:95:00:6d:0d'  IP_Address='192.168.9.53'  Unit_ID='65535/0/0'  Location_1=''  Location_2='BTS_NBT131G'  Equipment_Version='165g029_79'  Software_Version='168a352_v142b30d0'  Unit_Name='nbts-00-02-95-00-6D-0D'  Serial_Number='00200285'
+
+
+5. DHCP stop
+
+sudo /etc/init.d/isc-dhcp-server stop
+
+
+6.set unit ID 
+sudo ./ipaccess-config -u 1111/0/0 192.168.9.53
+ipaccess-config (C) 2009-2010 by Harald Welte and others
+This is FREE SOFTWARE with ABSOLUTELY NO WARRANTY
+
+Trying to connect to ip.access BTS ...
+<0005> abis_nm.c:381 OC=BASEBAND-TRANSCEIVER(04) INST=(00,00,ff) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+OML link established using TRX 0
+setting Unit ID to '1111/0/0'
+
+
+7. set bts btc 
+sudo ./ipaccess-config -o 192.168.9.5 192.168.9.53
+ipaccess-config (C) 2009-2010 by Harald Welte and others
+This is FREE SOFTWARE with ABSOLUTELY NO WARRANTY
+
+Trying to connect to ip.access BTS ...
+<0005> abis_nm.c:381 OC=BASEBAND-TRANSCEIVER(04) INST=(00,00,ff) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+OML link established using TRX 0
+setting primary OML link IP to '192.168.9.5'
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,00) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,01) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,02) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,03) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,04) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,05) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,06) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=CHANNEL(03) INST=(00,00,07) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:381 OC=RADIO-CARRIER(02) INST=(00,00,ff) STATE CHG: OP_STATE=Disabled AVAIL=Not installed(07) ADM=Locked 
+<0005> abis_nm.c:2599 OC=BASEBAND-TRANSCEIVER(04) INST=(00,00,ff) IPACCESS(0xf0): SET NVATTR ACK
+Set the NV Attributes.
+
+

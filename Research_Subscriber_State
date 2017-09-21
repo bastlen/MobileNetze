@@ -1,0 +1,38 @@
+Befehle osmo-nitb:
+
+0.14.0
+
+@zecke zecke tagged this on Feb 12, 2015 · 1102 commits to master since this tag
+
+This is 0.14.0
+
+
+
+
+show running-config
+--> aktuelle configuration des BTS 
+
+show network
+--> wenig info --- useless
+
+
+show bts
+--> oml link state 
+--> avail 'OK'
+--> Paging: 0 pending requests, 16 free slots
+
+
+show statistics
+--> IMSI Detach Indications : 2
+--> wenn einer raus indications zählt hoch 
+--> Location Update : 5 attach, 28 normal, 8 periodic
+wenn einer verbunden attch zählt hoch 
+
+
+show subscriber id x
+--> LAC: 0/0x0
+offline
+--> LAC: 1/0x1
+online
+
+
