@@ -2,7 +2,7 @@ import os
 
 # params for establishing connection to nanoBTS
 con_arg1 = "cd"
-con_arg2 = "cd ./openbsc/openbsc/src/osmo-nitb/"
+con_arg2 = "cd ./home/mone2/openbsc-0.14.0/openbsc/src/osmo-nitb"
 con_arg3 = "./osmo-nitb -P"
 
 # establish connection to nanoBTS

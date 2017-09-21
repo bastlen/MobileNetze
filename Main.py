@@ -1,4 +1,5 @@
 import telnetlib
+import sqlite3
 
 tn = telnetlib.Telnet('localhost', port=4242, timeout=20)
 print('Connection established!')
@@ -6,6 +7,13 @@ print('Connection established!')
 ################
 # main program #
 ################
+
+conn = sqlite3.connect('/home/mone2/openbsc-0.14.0/openbsc/src/hlr.sqlite3')
+c = conn.cursor()
+c.execute('SELECT * FROM Subscriber;')
+temp = c.fetchone()
+
+print(temp)
 
 # arguments
 defCommand = b""
