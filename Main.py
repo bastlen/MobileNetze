@@ -7,14 +7,13 @@ print('Connection established!')
 ##vars
 # admin subscriber id
 adminSubID = 9
+subscriberList = []
 
 ## arguments
 # inital command
 defCommand = b""
 # show subscriber
-command1 = b"show subscriber id 1"
-#TODO Build SMS command subscriber id 1 sms sender id 2 send Hello World
-commandSMS = "subscriber id \i sms sender  "
+comSub = "show subscriber id "
 
 ## execute comands
 def execCommand(command):
@@ -41,16 +40,39 @@ def broadcastSMS(receiverIDs, message):
         adminSMS(x, message)
 
 
+## check subscriber status
+def checkSubsState(subsList):
+    resList = []
+    #subState = [0] * len(subsList)
+    counter = 0
+    for x in subsList:
+        print(counter)
+        arg = comSub + str(x)
+        print(str.encode(arg, 'ascii'))
+        resList.append(execCommand(str.encode(arg, 'ascii')))
+        #TODO check LAC and set value in subState
+        if "LAC: 1/0x1" in str(resList[counter]):
+            print(str(x)+" ist Online: "+str(resList[counter]))
+        else:
+            print(str(x) + " ist Offline: " + str(resList[counter]))
+        counter = counter +1
+    return
+
+
 ## TESTS
 
 ## default test (get connection)
 execCommand(defCommand)
 
 ## admin singel SMS
-adminSMS(2, "Testmessage")
+#adminSMS(2, "Testmessage")
 
 ## broaadcast SMS
 # list with subscriber ID
 idList = [2, 5, 8]
-broadcastSMS(idList,"Turn Off Phone!")
+#broadcastSMS(idList,"Turn Off Phone!")
 
+
+## test checkSubsState
+subList= [2, 8]
+checkSubsState(subList)
