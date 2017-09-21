@@ -18,7 +18,7 @@ def getSubscribers():
     outList = cursor.fetchall()
     return outList
 
-
+#kllk
 subscriberList = getSubscribers()
 for x in subscriberList:
     print(x)
