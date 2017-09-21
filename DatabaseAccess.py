@@ -1,8 +1,17 @@
 import sqlite3
 
-conn = sqlite3.connect('/home/mone2/openbsc-0.14.0/openbsc/src/hlr.sqlite3')
-c = conn.cursor()
-c.execute('SELECT * FROM Subscriber;')
-temp = c.fetchone()
 
-print(temp)
+# database Path
+path = '/home/mone2/openbsc-0.14.0/openbsc/src/osmo-nitb/hlr.sqlite3'
+# connect to DB
+conn = sqlite3.connect(path)
+#conn = sqlite3.connect(db_path)
+cursor = conn.cursor()
+
+cursor.execute("SELECT * FROM Subscriber")
+
+out = cursor.fetchall()
+strOut = ''
+for x in out:
+    print(x)
+
