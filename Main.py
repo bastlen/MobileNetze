@@ -8,16 +8,13 @@ print('Connection established!')
 # main program #
 ################
 
-conn = sqlite3.connect('/home/mone2/openbsc-0.14.0/openbsc/src/hlr.sqlite3')
-c = conn.cursor()
-c.execute('SELECT * FROM Subscriber;')
-temp = c.fetchone()
-
-print(temp)
-
 # arguments
 defCommand = b""
 command1 = b"show subscriber id 1"
+
+#TODO Build SMS command subscriber id 1 sms sender id 2 send Hello World
+commandSMS = "subscriber id \i sms sender  "
+
 
 # execute comands
 def execCommand(command):

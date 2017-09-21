@@ -1,0 +1,10 @@
+Create Admin:
+
+subscriber create imsi 666666666666666 
+subscriber id 9 name ADMIN 
+subscriber id 9 authorized 1 
+subscriber id 9 extension 6666 
+
+
+SMS 
+subscriber id 2 sms sender id 9 ADMIN: get out
